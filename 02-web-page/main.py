@@ -7,7 +7,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from datetime import datetime
 
 
-app = Flask(__name__)
+app = Flask(__name__) 
 app.config['SECRET_KEY'] = 'super-secret-gamer-key-2026'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gamerportal.db' 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
