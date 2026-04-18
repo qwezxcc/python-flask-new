@@ -6,6 +6,7 @@ from werkzeug.utils import secure_filename
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from datetime import datetime
 
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 app = Flask(__name__) 
 app.config['SECRET_KEY'] = 'super-secret-gamer-key-2026'
@@ -170,6 +171,22 @@ def my_library():
         
     user_games = Game.query.filter_by(user_id=current_user.id).order_by(Game.date_added.desc()).all()
     return render_template('my_library.html', games=user_games)
+
+
+@app.route('/delete_news/<int:news_id>', methods=['POST'])
+@login_required
+def delete_news(news_id):
+    news = News.query.get_or_404(news_id)
+
+    if news.author_id != current_user.id:
+        flash('you do not have permission to delete this news')
+        return redirect(url_for('news'))
+    
+    db.session.delete(news)
+    db.session.commit()
+
+    flash('news succesfuly deleted', 'succes')
+    return redirect(url_for('news'))
 
 @app.route('/delete_game/<int:game_id>', methods=['POST'])
 @login_required
