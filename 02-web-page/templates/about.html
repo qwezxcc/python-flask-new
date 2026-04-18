@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block title %}Про автора - Портал Геймера{% endblock %}
+
+{% block content %}
+<div class="profile-container about-container">
+    
+    <div class="profile-header panel-box">
+        <div class="avatar-placeholder avatar-large">
+            👨‍💻
+        </div>
+        <div class="profile-titles">
+            <h1 class="player-name">Модератор</h1>
+            <p class="player-class">Клас: Level 99 Fullstack & Game Crafter</p>
+            <p class="lore-quote">"Перетворюю каву на код, а хаос — на структуровані бази даних."</p>
+        </div>
+    </div>
+    
+    <div class="stats-grid panel-box stats-grid-2col">
+        <div class="stat-box">
+            <span class="stat-label">HP (Енергія/Кава)</span>
+            <div class="stat-bar">
+                <div class="stat-fill hp-fill" style="width: 85%;"></div>
+            </div>
+        </div>
+        <div class="stat-box">
+            <span class="stat-label">EXP (Досвід розробки)</span>
+            <div class="stat-bar">
+                <div class="stat-fill exp-fill" style="width: 72%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="about-grid">
+        
+        <div class="panel-box lore-section">
+            <h2 class="section-heading">Модератор</h2>
+            <div class="lore-text">
+                <p>Вітаю у моєму сховищі коду та цифрових спогадів! Мій шлях у світ технологій розпочався не лише з натискання клавіш, а й з глибокого розуміння того, як працюють складні системи. Я завжди захоплювався точністю інженерної думки, і з часом ця пристрасть плавно перетекла у розробку програмного забезпечення. Створення додатків для мене — це як проєктування деталей машини: кожен рядок коду має виконувати свою функцію ідеально.</p>
+                <p>Ідея створення цього "Порталу Геймера" народилася з потреби впорядкувати власний ігровий хаос. Як людина, що постійно жонглює різними проєктами, я потребував єдиного місця для збереження пройдених та запланованих ігор. Flask та магія шаблонів Jinja2 дозволили мені викувати цей інструмент з нуля. Це не просто сайт, це моя особиста цифрова майстерня, де я експериментую з архітектурою баз даних та сучасним веб-дизайном на React чи чистому JS.</p>
+                <p>Але мій інтерес не обмежується лише вебом. Мене завжди вабила розробка самих ігор. Нещодавно я з головою занурився у створення 2D-симуляторів на Python з використанням бібліотеки Pygame-ce. Робота зі спрайтами, налаштування логіки руху роботів, вивчення незалежної від частоти кадрів фізики (та сама магія delta time) — це той драйв, який змушує мене сидіти за монітором до пізньої ночі.</p>
+                <p>Розробка ігор та мобільних додатків чудово доповнює мої професійні інтереси. Я часто знаходжу паралелі між чисельним моделюванням у складних CAD/CAE системах (на кшталт Ansys чи FreeCAD) і структуруванням логіки в Java для Android-застосунків. Наприклад, коли я розробляв мультиплеєрні ігри по Wi-Fi (як-от класичні "Хрестики-нулики" з динамічним полем), я застосовував той самий системний підхід, що й при розрахунках надійності складних механічних конструкцій.</p>
+                <p>Життя розробника — це постійний процес фарму досвіду. Зараз я активно прокачую не лише технічні навички, але й лінгвістичні — наприклад, занурююсь у тонкощі англійської граматики, розбираючи часи та артиклі так само ретельно, як і алгоритми сортування масивів. Цей портал росте разом зі мною, обростає новими фічами, і я радий вітати вас у цій подорожі!</p>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="panel-box sidebar-box">
+                <h2 class="section-heading small-heading">Інвентар (Скіли)</h2>
+                <ul class="skills-list column-list">
+                    <li class="skill-item">🛡️ Броня HTML/CSS/JS</li>
+                    <li class="skill-item">⚔️ Дворучний меч Python (Flask/Pygame)</li>
+                    <li class="skill-item">🔮 Магічний фоліант SQLAlchemy</li>
+                    <li class="skill-item">📱 Артефакт Android Studio (Java)</li>
+                    <li class="skill-item">⚙️ Амулет інженерії (CAD/CAE)</li>
+                </ul>
+            </div>
+
+            <div class="panel-box sidebar-box">
+                <h2 class="section-heading small-heading quest-heading">Активні квести</h2>
+                <ul class="quest-list">
+                    <li class="quest-item">
+                        <strong class="quest-tag">[Main]</strong> Дописати алгоритм колізій для гри з роботами
+                    </li>
+                    <li class="quest-item">
+                        <strong class="quest-tag">[Side]</strong> Вивчити всі нюанси Present Simple та артиклів
+                    </li>
+                    <li class="quest-item no-border">
+                        <strong class="quest-tag">[Daily]</strong> Випити 3 чашки кави, не зломавши продакшен
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

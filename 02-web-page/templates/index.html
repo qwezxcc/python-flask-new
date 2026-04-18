@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block title %}Головна - Портал Геймера{% endblock %}
+
+{% block content %}
+<section class="hero-section text-center">
+    <h1 class="hero-title">Твоя персональна бібліотека ігор</h1>
+    <p class="hero-subtitle">Зберігай, оцінюй та плануй свої проходження в одному місці.</p>
+    
+    {% if current_user.is_authenticated %}
+        <a href="{{ url_for('my_library') }}" class="btn-primary action-btn">Відкрити Мою Бібліотеку</a>
+    {% else %}
+        <a href="{{ url_for('register') }}" class="btn-primary action-btn">Створити свій список</a>
+    {% endif %}
+</section>
+
+<section class="latest-news-section" style="margin-bottom: 4rem;">
+    <div class="news-header-flex">
+        <h2 class="section-heading">Свіжі Ігрові Хроніки</h2>
+        <a href="{{ url_for('news') }}" class="text-link">Всі новини &raquo;</a>
+    </div>
+    
+    {% if news_list %}
+        <div class="games-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+            {% for post in news_list %}
+            <article class="panel-box" style="padding: 1.5rem;">
+                <h3 class="news-title" style="font-size: 1.2rem; margin-bottom: 0.5rem;">
+                    <a href="{{ url_for('view_news', news_id=post.id) }}" style="color: inherit; text-decoration: none;">{{ post.title }}</a>
+                </h3>
+                <div class="news-meta" style="font-size: 0.85rem; margin-bottom: 1rem;">
+                    {{ post.date_posted.strftime('%d.%m.%Y') }} | {{ post.author.username }}
+                </div>
+                <p class="news-excerpt" style="font-size: 0.95rem;">                    
+                    {{ post.content | striptags | truncate(80, true, '...') }}
+                </p>
+            </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="panel-box text-center">
+            <p>Новин поки немає.</p>
+        </div>
+    {% endif %}
+</section>
+
+<section class="top-games-section">
+    <h2 class="section-heading">Останні активності гравців</h2>
+    <div class="games-grid">
+        
+        {% if games %}
+            {% for game in games %}
+            <article class="game-card">
+                <div class="game-cover-placeholder"></div>
+                <div class="game-info">
+                    <h3 class="game-title">{{ game.title }}</h3>
+                    
+                    {% if game.status == 'Пройдено' %}
+                        <span class="game-badge badge-completed">{{ game.status }}</span>
+                    {% elif game.status == 'В планах' %}
+                        <span class="game-badge badge-planned">{{ game.status }}</span>
+                    {% else %}
+                        <span class="game-badge status-playing">{{ game.status }}</span>
+                    {% endif %}
+                    
+                    <p class="game-meta">Гравець: {{ game.owner.username }}</p>
+
+                    {% if game.file_name %}
+                    <div class="game-actions">
+                        <a href="{{ url_for('static', filename='files/' + game.file_name) }}" class="btn-secondary btn-small" target="_blank">Завантажити</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
+        {% else %}
+            <div class="panel-box text-center full-width-grid">
+                <p>Ніхто ще не додав жодної гри. Стань першим!</p>
+            </div>
+        {% endif %}
+
+    </div>
+</section>
+{% endblock %}

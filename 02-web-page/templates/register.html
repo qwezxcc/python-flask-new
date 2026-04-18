@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}Реєстрація - Портал Геймера{% endblock %}
+
+{% block content %}
+<div class="auth-container panel-box">
+    <h1 class="auth-title">Створення профілю</h1>
+    <form action="{{ url_for('register') }}" method="POST" class="auth-form">
+        <div class="form-group">
+            <label for="username" class="form-label">Ігровий нікнейм</label>
+            <input type="text" id="username" name="username" class="form-input" required>
+        </div>
+        <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-input" required>
+        </div>
+        <div class="form-group">
+            <label for="password" class="form-label">Пароль</label>
+            <input type="password" id="password" name="password" class="form-input" required>
+        </div>
+        <button type="submit" class="btn-primary submit-btn">Приєднатися до гри</button>
+    </form>
+</div>
+{% endblock %}

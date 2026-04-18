@@ -1,0 +1,560 @@
+/* =========================================
+   1. ЗМІННІ ТА БАЗОВІ НАЛАШТУВАННЯ
+   ========================================= */
+:root {
+    --bg-main: #f4f4f9;          /* Світлий фон сторінки */
+    --bg-panel: #ffffff;         /* Білий фон для карток */
+    --text-main: #4a4a5a;        /* Основний колір тексту */
+    --text-heading: #1a1a24;     /* Майже чорний для заголовків */
+    --accent-primary: #6200ea;   /* Основний акцент (фіолетовий) */
+    --accent-hover: #4a00b0;     /* Темніший фіолетовий для ховеру */
+    --accent-secondary: #00b4d8; /* Додатковий акцент (бірюзовий) */
+    --success: #0081a7;          /* Колір для пройдених ігор */
+    --warning: #f77f00;          /* Колір для ігор в планах */
+    --danger: #ef233c;           /* Колір для помилок/HP */
+    --border-radius: 12px;       /* Заокруглення кутів */
+    --transition: 0.3s ease;     /* Стандартна анімація */
+    --border-color: rgba(0, 0, 0, 0.08); /* Колір рамок */
+    --shadow-main: 0 4px 15px rgba(0, 0, 0, 0.05); /* Основна тінь */
+    --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.1); /* Тінь при наведенні */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* =========================================
+   2. ГЛОБАЛЬНИЙ ЛЕЙАУТ (ШАПКА, ПІДВАЛ)
+   ========================================= */
+.site-header {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.main-nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Для адаптивності */
+    gap: 1rem;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap; /* Для адаптивності */
+}
+
+.nav-link {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--accent-primary);
+}
+
+.auth-btn {
+    background-color: var(--accent-primary);
+    color: white !important;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.auth-btn:hover {
+    background-color: var(--accent-hover);
+    box-shadow: 0 4px 12px rgba(98, 0, 234, 0.3);
+}
+
+.content-wrapper {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+}
+
+.site-footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--bg-panel);
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+}
+
+/* =========================================
+   3. UI КОМПОНЕНТИ (КНОПКИ, ПАНЕЛІ, ФОРМИ)
+   ========================================= */
+.panel-box {
+    background-color: var(--bg-panel);
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-main);
+    border: 1px solid var(--border-color);
+}
+
+.btn-primary, .btn-secondary {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--accent-primary);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    box-shadow: 0 4px 15px rgba(98, 0, 234, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--accent-primary);
+    border: 1px solid var(--accent-primary);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(98, 0, 234, 0.05);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-heading);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.form-input, .form-textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    color: var(--text-heading);
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.form-input:focus, .form-textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(98, 0, 234, 0.15);
+    background-color: #fff;
+}
+.text-center {
+    text-align: center;
+}
+
+/* =========================================
+   4. ГОЛОВНА СТОРІНКА (INDEX)
+   ========================================= */
+.hero-section {
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.hero-title {
+    font-size: 3rem;
+    color: var(--accent-primary);
+    margin-bottom: 1rem;
+    font-weight: 800;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--text-main);
+}
+
+.section-heading {
+    color: var(--text-heading);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--accent-primary);
+    padding-left: 1rem;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.game-card {
+    background-color: var(--bg-panel);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-main);
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(98, 0, 234, 0.2);
+}
+
+.game-cover-placeholder {
+    height: 160px;
+    background: linear-gradient(45deg, #e0e0eb, #f4f4f9);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.game-info {
+    padding: 1.5rem;
+}
+
+.game-title {
+    color: var(--text-heading);
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.game-badge {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+.badge-completed { background-color: rgba(0, 129, 167, 0.1); color: var(--success); }
+.badge-planned { background-color: rgba(247, 127, 0, 0.1); color: var(--warning); }
+
+/* =========================================
+   5. АВТОРИЗАЦІЯ ТА АДМІНКА
+   ========================================= */
+.auth-container, .admin-panel-container {
+    max-width: 450px;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.admin-panel-container {
+    max-width: 700px;
+}
+
+.auth-title, .page-title {
+    color: var(--text-heading);
+    margin-bottom: 2rem;
+    font-weight: 800;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.text-link {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.text-link:hover {
+    text-decoration: underline;
+}
+
+.auth-redirect {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+}
+
+/* =========================================
+   6. СТОРІНКА АВТОРА (ПРОФІЛЬ)
+   ========================================= */
+.profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.avatar-placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    box-shadow: 0 4px 15px rgba(98, 0, 234, 0.3);
+    flex-shrink: 0;
+}
+
+.player-name {
+    font-size: 2.5rem;
+    color: var(--text-heading);
+    font-weight: 800;
+}
+
+.player-class {
+    color: var(--accent-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.stats-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.stat-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-heading);
+    font-weight: 600;
+}
+
+.stat-bar {
+    width: 100%;
+    height: 14px;
+    background-color: #e0e0eb;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.stat-fill {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.hp-fill { background-color: var(--danger); }
+.exp-fill { background-color: var(--accent-primary); }
+
+.skills-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+.skill-item {
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    color: var(--text-heading);
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+/* =========================================
+   7. НОВИНИ ТА 404
+   ========================================= */
+.news-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.news-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.news-post {
+    text-align: left;
+}
+
+.news-meta {
+    font-size: 0.9rem;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.read-more-link {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.read-more-link:hover {
+    text-decoration: underline;
+}
+
+.error-container {
+    max-width: 600px;
+    margin: 4rem auto;
+}
+
+.glitch-text {
+    font-size: 6rem;
+    color: var(--danger);
+    margin-bottom: 0;
+    font-weight: 900;
+}
+
+.error-subtitle {
+    color: var(--text-heading);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.return-btn {
+    margin-top: 2rem;
+}
+
+/* =========================================
+   8. МЕДІА-ЗАПИТИ (АДАПТИВНІСТЬ)
+   ========================================= */
+@media (max-width: 768px) {
+    .main-nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-menu {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .content-wrapper {
+        padding: 1.5rem 1rem;
+    }
+
+    .panel-box {
+        padding: 1.5rem;
+    }
+
+    .games-grid {
+        grid-template-columns: 1fr; /* По одній картці на мобільному екрані */
+    }
+}
+
+
+.personal-library-grid {
+    grid-template-columns: 1fr 2fr;
+}
+
+@media (max-width: 768px) {
+    .personal-library-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.game-date {
+    font-size: 0.8rem;
+    margin-top: 10px;
+    color: var(--text-main);
+}
+
+.btn-delete {
+    margin-top: 15px;
+    border-color: var(--danger) !important;
+    color: var(--danger) !important;
+}
+
+.file-attached-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-main);
+    font-weight: bold;
+}
+
+.file-link-wrapper {
+    margin-top: 10px;
+}
+
+.status-playing {
+    background-color: rgba(98, 0, 234, 0.1);
+    color: var(--accent-primary);
+}
+
+.file-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.delete-action {
+    margin-top: 15px;
+}
+
+.delete-action .btn-secondary {
+    border-color: var(--danger);
+    color: var(--danger);
+    width: 100%;
+}
+
+.file-link {
+    margin-top: 10px;
+}

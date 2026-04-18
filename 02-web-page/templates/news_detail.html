@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ post.title }} - Портал Геймера{% endblock %}
+
+{% block content %}
+<div class="news-container" style="max-width: 800px; margin: 0 auto;">
+    <article class="news-post panel-box">
+        <h1 class="page-title" style="margin-bottom: 0.5rem; font-size: 2.2rem; color: var(--accent-primary);">{{ post.title }}</h1>
+        
+        <div class="news-meta" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 2rem;">
+            <span class="news-date">🗓️ {{ post.date_posted.strftime('%d.%m.%Y о %H:%M') }}</span> | 
+            <span class="news-author">✍️ Автор: <strong>{{ post.author.username }}</strong></span>
+        </div>
+        
+        <div class="news-content" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-heading);">
+            {{ post.content | safe }}
+        </div>
+        
+        <div style="margin-top: 3rem;">
+            <a href="{{ url_for('news') }}" class="btn-secondary" style="text-decoration: none;">&laquo; Повернутися до всіх новин</a>
+        </div>
+    </article>
+</div>
+{% endblock %}

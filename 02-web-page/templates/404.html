@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}Помилка 404 - Портал Геймера{% endblock %}
+
+{% block content %}
+<div class="error-container text-center panel-box">
+    <h1 class="glitch-text error-code">404</h1>
+    <h2 class="error-subtitle">GAME OVER / LEVEL NOT FOUND</h2>
+    <p class="error-desc">Схоже, ти зайшов у незвідану локацію. Цієї сторінки не існує в нашому світі.</p>
+    <a href="{{ url_for('index') }}" class="btn-primary return-btn">Повернутися на базу (Головна)</a>
+</div>
+{% endblock %}

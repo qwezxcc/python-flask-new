@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Портал Геймера{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="gamer-theme">
+    <header class="site-header">
+        <nav class="main-nav">
+            <a href="{{ url_for('index') }}" class="nav-logo">🎮 Портал Геймера</a>
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('index') }}" class="nav-link">Головна</a></li>
+                <li><a href="{{ url_for('about') }}" class="nav-link">Про автора</a></li>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('my_library') }}" class="nav-link">Моя бібліотека</a></li>
+                    <li><a href="{{ url_for('news') }}" class="nav-link">Новини</a></li>
+                    <li><a href="{{ url_for('logout') }}" class="nav-link auth-btn">Вихід ({{ current_user.username }})</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}" class="nav-link">Вхід</a></li>
+                    <li><a href="{{ url_for('register') }}" class="nav-link auth-btn">Реєстрація</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main class="content-wrapper">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flash-messages">
+                    {% for category, message in messages %}
+                        <li class="flash-item flash-{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer">
+        <p>&copy; 2026 Портал Геймера. Твоя персональна бібліотека.</p>
+    </footer>
+</body>
+</html>

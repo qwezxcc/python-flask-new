@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %} Новини ігор {% endblock %}
+
+{% block content %}
+
+<div class="news-container">
+    <div class="news-header-flex">        
+        <h1 class="page-title">Ігрові хроніки</h1>           
+        <a href="{{ url_for('addnews') }}" class="btn-secondary add-btn">
+            + Додати новину
+        </a>
+    </div>
+    
+    <div class="news-feed">     
+        {% for news in news_list %}   
+        <article class="news-post panel-box">
+            <h2 class="news-title">{{ news.title }}</h2>
+            <div class="news-meta">
+                <span class="news-date">
+                    {{ news.date_posted.strftime('%d.%m.%Y %H:%M') }}
+                </span>
+            </div>
+            <p class="news-excerpt">
+                {{ news.content | striptags | truncate(80, true, '...') }}
+            </p>
+            
+            <a class="read-more-link" 
+               href="{{ url_for('view_news', news_id=news.id) }}">Читати повністю</a>
+            
+            {% if news.author_id == current_user.id %}
+            <div class="news-actions" style="margin-top: 15px;">
+                <form 
+                action="{{ url_for('delete_news', news_id=news.id) }}"
+                method="post">
+                    <button 
+                        type="submit" 
+                        class="btn-secondary"
+                        style="padding: 0.3rem 0.8rem; font-size: 0.8rem; border-color: var(--danger); color: var(--danger);"
+                        onclick="return confirm('Ви впевнені, що хочете видалити цю новину?')">
+                        Видалити
+                    </button>
+                </form>
+            </div>
+            {% endif %}
+        </article>
+        {% else %}
+            <p class="no-news-message">Наразі новин немає.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

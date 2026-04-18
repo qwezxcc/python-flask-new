@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+
+{% block title %}Моя бібліотека - Портал Геймера{% endblock %}
+
+{% block content %}
+<div class="news-header-flex">
+    <h1 class="page-title">Сховище ігор гравця {{ current_user.username }}</h1>
+</div>
+
+<div class="games-grid">
+    
+    <div class="panel-box">
+        <h2 class="section-heading">+ Додати до колекції</h2>
+        <form action="{{ url_for('my_library') }}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title" class="form-label">Назва гри</label>
+                <input type="text" id="title" name="title" class="form-input" required placeholder="Введіть назву гри">
+            </div>
+            
+            <div class="form-group">
+                <label for="status" class="form-label">Статус проходження</label>
+                <select id="status" name="status" class="form-input" required>
+                    <option value="Граю">🎮 Зараз граю</option>
+                    <option value="Пройдено">🏆 Пройдено</option>
+                    <option value="В планах">📅 В планах</option>
+                    <option value="Покинуто">💀 Покинуто</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="file" class="form-label">Додати файл (скріншот/архів)</label>
+                <input type="file" id="file" name="file" class="form-input">
+            </div>
+            
+            <div class="form-group">
+                <label for="description" class="form-label">Опис</label>
+                <input type="text" id="description" name="description" class="form-input">
+            </div>
+    
+
+
+            <button type="submit" class="btn-primary submit-btn">Зберегти в бібліотеці</button>
+        </form>
+    </div>
+
+    <div class="library-content">
+        <h2 class="section-heading">Мій особистий список</h2>
+        
+        {% if games %}
+            <div class="games-grid">
+                {% for game in games %}
+                <article class="game-card">
+                    <div class="game-cover-placeholder">
+                        {% if game.file_name %}
+                            <div class="file-badge">📁 Файл прикріплено</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="game-info">
+                        <h3 class="game-title">{{ game.title }}</h3>
+                        
+                        {% if game.status == 'Пройдено' %}
+                            <span class="game-badge badge-completed">{{ game.status }}</span>
+                        {% elif game.status == 'В планах' %}
+                            <span class="game-badge badge-planned">{{ game.status }}</span>
+                        {% else %}
+                            <span class="game-badge status-playing">{{ game.status }}</span>
+                        {% endif %}
+                        
+                        <p class="news-meta">Додано: {{ game.date_added.strftime('%d.%m.%Y') }}</p>
+
+                        {% if game.file_name %}
+                            <div class="file-link">
+                                <a href="{{ url_for('static', filename='files/' + game.file_name) }}" target="_blank" class="text-link">Відкрити файл</a>
+                            </div>
+                        {% endif %}
+                        
+                        <form action="{{ url_for('delete_game', game_id=game.id) }}" method="POST" class="delete-action">
+                            <button type="submit" class="btn-secondary" onclick="return confirm('Видалити цю гру з вашої бібліотеки?');">
+                                Видалити
+                            </button>
+                        </form>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="panel-box text-center">
+                <p>Твоя бібліотека поки порожня. Час додати першу пригоду!</p>
+            </div>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}
+
